@@ -157,6 +157,6 @@ document.querySelector("#link-texto").addEventListener("click", (e)=>{
 document.querySelector("#link-youtube").addEventListener("click", (e)=>{
     e.preventDefault();
     e.stopPropagation();
-    window.open("https://youtu.be/AS_T47NqNYY?list=RDAS_T47NqNYY", "_blank");
+    window.open("https://youtu.be/AS_T47NqNYY", "_blank");
 });
 
