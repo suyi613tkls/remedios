@@ -1,7 +1,5 @@
 /* =========================================
-   COLORES Y FUENTE
-   Si quieres cambiar un color, lo cambias aquí
-   y se cambia en toda la página.
+   colores de toda la pág
    ========================================= */
 :root {
     --lila: #ddc4ff;
@@ -21,7 +19,7 @@ body {
     margin: 0;
 }
 
-/* Clase auxiliar: oculta cualquier cosa */
+/* clase auxiliar, pa ocultar cualquier cosa */
 .oculta {
     display: none !important;
 }
@@ -33,7 +31,7 @@ body {
 
 
 /* =========================================
-   PANTALLA 1: BIENVENIDA (el sobre)
+   bienvenida, el sobre
    ========================================= */
 .bienvenida {
     display: flex;
@@ -45,7 +43,6 @@ body {
     transition: opacity 0.5s ease;
 }
 
-/* Cuando pulsa "Entrar", la bienvenida se desvanece */
 .bienvenida.saliendo {
     opacity: 0;
     pointer-events: none;
@@ -99,7 +96,7 @@ body {
     font-size: 1rem;
 }
 
-/* El enlace "Entrar" con forma de botoncito */
+/* entrar como botón */
 .mensaje a {
     position: relative;
     z-index: 9999;
@@ -125,9 +122,7 @@ body {
     border-bottom: 120px solid var(--menta);
 }
 
-/* El corazón del sobre.
-   Antes se llamaba ".bx", pero esa clase la usan TODOS los iconos de
-   boxicons, así que le puse nombre propio para que no afecte a otros. */
+/* el corazón del sobre */
 .corazon {
     position: absolute;
     color: var(--verde-oscuro);
@@ -142,7 +137,7 @@ body {
     margin-top: -10px;
 }
 
-/* Título y textos: se suben cuando el sobre se abre */
+/* títulos y textos */
 .bienvenida h1,
 .bienvenida .psorpresa,
 .bienvenida .ppsorpresa {
@@ -182,7 +177,7 @@ body {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Estados que activa JavaScript al abrir el sobre */
+/* esto se activa cuando se abre el sobre */
 .abrir-superior {
     transform: rotateX(180deg);
 }
@@ -204,19 +199,19 @@ body {
 
 
 /* =========================================
-   PANTALLA 2: LA APP
+   la app, la batería, las vistas y las tarjetas
    ========================================= */
 .app {
     max-width: 480px;
     margin: 0 auto;
     min-height: 100vh;
     min-height: 100dvh;
-    padding: 24px 16px 110px;   /* abajo hay hueco para la barra de navegación */
+    padding: 24px 16px 110px;   /* para la barra de navegación */
     box-sizing: border-box;
     animation: aparecer 0.5s ease;
 }
 
-/* ----- Cabecera y batería ----- */
+/* ----- cabecera y batería ----- */
 .app-cabecera {
     text-align: center;
     margin-bottom: 24px;
@@ -246,7 +241,7 @@ body {
 
 .bateria-nivel {
     height: 100%;
-    width: 0%;                               /* JavaScript va cambiando esto */
+    width: 0%;
     background: linear-gradient(90deg, var(--verde), var(--verde-claro));
     transition: width 0.6s ease;
 }
@@ -270,7 +265,7 @@ body {
     font-size: 0.95rem;
 }
 
-/* ----- Vistas (Inicio / Juegos / Sorpresa) ----- */
+/* ----- vistas, parte de inicio, juegos y la sorpresita que cambia ----- */
 .vista {
     display: none;
 }
@@ -280,7 +275,7 @@ body {
     animation: aparecer 0.35s ease;
 }
 
-/* ----- Tarjetas de los remedios ----- */
+/* ----- tarjetas de los remedios ----- */
 .tarjetas {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -327,7 +322,7 @@ body {
     opacity: 0.75;
 }
 
-/* Cuando ya has abierto un remedio: borde verde y tic */
+/* cuando ya abres un remedio */
 .tarjeta.abierta {
     border-color: var(--verde);
 }
@@ -349,7 +344,7 @@ body {
     justify-content: center;
 }
 
-/* ----- Pantallas "próximamente" ----- */
+/* ----- un próximamente ----- */
 .vista-vacia {
     background: var(--crema-clara);
     border-radius: 18px;
@@ -371,7 +366,7 @@ body {
     opacity: 0.8;
 }
 
-/* ----- Barra de navegación de abajo ----- */
+/* ----- la barra de navegación ----- */
 .nav {
     position: fixed;
     bottom: 0;
@@ -418,7 +413,7 @@ body {
 
 
 /* =========================================
-   VENTANITA (modal)
+   ventanita modal
    ========================================= */
 .modal {
     position: fixed;
@@ -491,7 +486,7 @@ body {
 
 
 /* =========================================
-   MÓVIL
+   vista para pantalla móvil, lloro si no se ve bien jsjjsjsjsj
    ========================================= */
 @media (max-width: 768px) {
     .mensaje:before {
@@ -519,8 +514,7 @@ body {
     }
 }
 
-/* Pantallas estrechas: el sobre mide 360px fijos, así que lo
-   encogemos un poco para que quepa (antes se salía por los lados) */
+/* por si es más estrecha la pantalla, rollo más más */
 @media (max-width: 400px) {
     .contenedor {
         transform: scale(0.88);

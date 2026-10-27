@@ -1,6 +1,5 @@
 /* =========================================
-   REFERENCIAS A ELEMENTOS DE LA PÁGINA
-   (los guardamos una vez al principio para usarlos después)
+   todas las refs a los elementos que uso, para q esten una sola vez y no repetir cod
    ========================================= */
 const bienvenida = document.querySelector("#bienvenida");
 const app = document.querySelector("#app");
@@ -14,22 +13,19 @@ const linkEntrar = document.querySelector("#link-entrar");
 
 
 /* =========================================
-   PANTALLA 1: EL SOBRE
-   Antes el código de abrir estaba copiado dos veces
-   (botón y clic en el sobre). Ahora es una función
-   y se llama desde los dos sitios.
+   el sobre que se abre y se cierra
    ========================================= */
 let cartaAbierta = false;
 
 function abrirCarta() {
-    if (cartaAbierta) return;   // si ya está abierta, no hacemos nada
+    if (cartaAbierta) return;   // esto es si está abierta la carta
     cartaAbierta = true;
 
     superior.classList.add("abrir-superior");
     bienvenida.classList.add("titulo-arriba");
     corazon.classList.add("quieto");
 
-    // Esperamos a que la solapa termine de girar y entonces sale la carta
+
     setTimeout(() => {
         mensaje.classList.add("abrir-mensaje");
         superior.style.zIndex = -1;
@@ -42,7 +38,7 @@ function cerrarCarta() {
 
     mensaje.classList.remove("abrir-mensaje");
 
-    // Esperamos a que la carta baje y entonces se cierra la solapa
+
     setTimeout(() => {
         bienvenida.classList.remove("titulo-arriba");
         corazon.classList.remove("quieto");
@@ -57,10 +53,10 @@ contenedor.addEventListener("click", abrirCarta);
 
 
 /* =========================================
-   DE LA BIENVENIDA A LA APP
+   lo que se ve al entrar a la app
    ========================================= */
 function entrarApp() {
-    bienvenida.classList.add("saliendo");        // se desvanece (0.5s)
+    bienvenida.classList.add("saliendo");
 
     setTimeout(() => {
         bienvenida.classList.add("oculta");
@@ -70,14 +66,14 @@ function entrarApp() {
 }
 
 linkEntrar.addEventListener("click", (e) => {
-    e.preventDefault();      // que el "#" no mueva la página
-    e.stopPropagation();     // que no cuente como clic en el sobre
+    e.preventDefault();
+    e.stopPropagation();
     entrarApp();
 });
 
 
 /* =========================================
-   PANTALLA 2: NAVEGACIÓN ENTRE VISTAS
+   navegar entre las vistas de la app
    ========================================= */
 const botonesNav = document.querySelectorAll(".nav-boton");
 const vistas = document.querySelectorAll(".vista");
@@ -97,8 +93,7 @@ botonesNav.forEach((boton) => {
 
 
 /* =========================================
-   LA BATERÍA
-   Cada remedio distinto que abre suma un trocito.
+   gestión del bloque de la batería y como se va cargando
    ========================================= */
 const bateriaNivel = document.querySelector("#bateria-nivel");
 const bateriaTexto = document.querySelector("#bateria-texto");
@@ -107,13 +102,13 @@ const bateriaMensaje = document.querySelector("#bateria-mensaje");
 const remediosAbiertos = new Set();   // un Set no repite elementos
 const totalRemedios = document.querySelectorAll(".tarjeta").length;
 
-// Un mensaje distinto según cuántos lleva abiertos (0, 1, 2, 3, 4)
+// mensajito que sale según va abriendo remedios
 const mensajesBateria = [
-    "Abre los remedios para cargar la batería 🔋",
-    "Ya hay algo de energía ⚡",
-    "Vas por la mitad, sigue 💪",
-    "Casi casi… 😏",
-    "¡Batería al 100%! Ya puedes con todo 💚",
+    "abre los remedios para cargar la bateríaaaa",
+    "ves como si que recargan",
+    "seguro que ya lo vas notando, 50% es un montón",
+    "casi casi… queda poco",
+    "batería al 100%, jssjsjs, ya puedes con todo y más, te quiero",
 ];
 
 function actualizarBateria() {
@@ -126,20 +121,19 @@ function actualizarBateria() {
 
 
 /* =========================================
-   LOS REMEDIOS (tarjetas + ventanita)
+   la parte de los remedios y la ventana modal
    ========================================= */
 const modal = document.querySelector("#modal");
 const modalContenido = document.querySelector("#modal-contenido");
 const modalCerrar = document.querySelector("#modal-cerrar");
 
-// Lo que se ve dentro de la ventanita para cada remedio.
-// Para añadir uno nuevo: pones aquí su contenido y una tarjeta en el HTML.
+// lo que se ve dentro de cada remedio
 const contenidos = {
     audio: `
         <h3>Qué gracia me hace este audio</h3>
         <div class="modal-emoji">💚</div>
         <audio controls>
-            <source src="audiote suyi.m4a" type="audio/mp4">
+            <source src="audiote_suyi.m4a" type="audio/mp4">
             Tu navegador no soporta audio :(
         </audio>
     `,
@@ -176,22 +170,22 @@ function abrirModal(nombre) {
 
 function cerrarModal() {
     modal.classList.add("oculta");
-    modalContenido.innerHTML = "";    // así también se para el audio
+    modalContenido.innerHTML = "";
 }
 
 modalCerrar.addEventListener("click", cerrarModal);
 
-// Clic en la parte oscura de fuera = cerrar
+// esto cierra si clicas fuera
 modal.addEventListener("click", (e) => {
     if (e.target === modal) cerrarModal();
 });
 
-// Tecla Escape = cerrar
+// tecla Escape = cerrar
 document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") cerrarModal();
 });
 
-// Clic en cada tarjeta
+// clic en cada tarjeta
 document.querySelectorAll(".tarjeta").forEach((tarjeta) => {
     tarjeta.addEventListener("click", () => {
         const nombre = tarjeta.dataset.remedio;
@@ -202,7 +196,7 @@ document.querySelectorAll(".tarjeta").forEach((tarjeta) => {
             abrirModal(nombre);
         }
 
-        // Marcamos la tarjeta como abierta y subimos la batería
+        // la tarjeta como abierta y se actualiza lo de la batería
         tarjeta.classList.add("abierta");
         remediosAbiertos.add(nombre);
         actualizarBateria();
