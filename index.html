@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ddc4ff" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,35 +19,130 @@
   </head>
 
   <body>
-    <h1>Remedios caseros de Suyi😙</h1>
-    <p class="psorpresa">Vente por aquí cuando necesites 
-      un suyiremedio y yo no esté cerca :((</p>
-    <p class="ppsorpresa">Seguramente lo actualice de vez en cuando ;))</p>
 
-    <div class="contenedor" id="AbrirContenedor">
-      <div class="superior"></div>
+    <!-- =========================================
+         PANTALLA 1: BIENVENIDA (el sobre)
+         ========================================= -->
+    <section class="bienvenida" id="bienvenida">
+      <h1>Remedios caseros de Suyi😙</h1>
+      <p class="psorpresa">Vente por aquí cuando necesites
+        un suyiremedio y yo no esté cerca :((</p>
+      <p class="ppsorpresa">Seguramente lo actualice de vez en cuando ;))</p>
 
-      <div class="mensaje">
-        <p><a href="#" id="link-audio">🔊 audiote con potencial</a></p>
-        <p><a href="#" id="link-foto">🖼️ fototas (lindas eh, no te pienses jsjs)</a></p>
-        <p><a href="#" id="link-texto">💌 mensajito pa ti</a></p>
-        <p><a href="#" id="link-youtube">cancioncitaa</a></p>
+      <div class="contenedor" id="AbrirContenedor">
+        <div class="superior"></div>
+
+        <div class="mensaje">
+          <p>Tu botiquín de energía 🔋</p>
+          <p><a href="#" id="link-entrar">💚 Entrar</a></p>
+        </div>
+
+        <div class="carta">
+          <i class="bx bxs-heart corazon"></i>
+        </div>
       </div>
 
-      <div class="carta">
-        <i class="bx bxs-heart"></i>
+      <div class="botones">
+        <button class="boton" id="Abrir">Abrir</button>
+        <button class="boton" id="Cerrar">Cerrar</button>
       </div>
-    </div>
+    </section>
 
-    <div id="visor" class="visor"></div>
 
-    <div class="botones">
-      <button class="boton" id="Abrir">Abrir</button>
-      <button class="boton" id="Cerrar">Cerrar</button>
+    <!-- =========================================
+         PANTALLA 2: LA APP
+         (empieza oculta, se muestra al pulsar "Entrar")
+         ========================================= -->
+    <section class="app oculta" id="app">
+
+      <!-- Cabecera con la batería -->
+      <header class="app-cabecera">
+        <h2>Remedios de Suyi😙</h2>
+        <div class="bateria" aria-label="Batería de energía">
+          <div class="bateria-cuerpo">
+            <div class="bateria-nivel" id="bateria-nivel"></div>
+          </div>
+          <div class="bateria-punta"></div>
+          <span class="bateria-texto" id="bateria-texto">0%</span>
+        </div>
+        <p class="bateria-mensaje" id="bateria-mensaje">Abre los remedios para cargar la batería 🔋</p>
+      </header>
+
+      <!-- VISTA: INICIO -->
+      <main class="vista activa" id="vista-inicio">
+        <div class="tarjetas">
+          <button class="tarjeta" data-remedio="audio">
+            <span class="tarjeta-emoji">🔊</span>
+            <span class="tarjeta-titulo">Audiote</span>
+            <span class="tarjeta-sub">con potencial</span>
+          </button>
+
+          <button class="tarjeta" data-remedio="fotos">
+            <span class="tarjeta-emoji">🖼️</span>
+            <span class="tarjeta-titulo">Fototas</span>
+            <span class="tarjeta-sub">lindas eh, no te pienses jsjs</span>
+          </button>
+
+          <button class="tarjeta" data-remedio="mensaje">
+            <span class="tarjeta-emoji">💌</span>
+            <span class="tarjeta-titulo">Mensajito</span>
+            <span class="tarjeta-sub">pa ti</span>
+          </button>
+
+          <button class="tarjeta" data-remedio="cancion">
+            <span class="tarjeta-emoji">🎵</span>
+            <span class="tarjeta-titulo">Cancioncitaa</span>
+            <span class="tarjeta-sub">súbele el volumen</span>
+          </button>
+        </div>
+      </main>
+
+      <!-- VISTA: JUEGOS (de momento vacía, aquí irán los minijuegos) -->
+      <main class="vista" id="vista-juegos">
+        <div class="vista-vacia">
+          <div class="vista-vacia-emoji">🎮</div>
+          <h3>Minijuegos</h3>
+          <p>Aquí van a vivir los minijuegos. Muy muy pronto.</p>
+        </div>
+      </main>
+
+      <!-- VISTA: SORPRESA (de momento vacía) -->
+      <main class="vista" id="vista-sorpresa">
+        <div class="vista-vacia">
+          <div class="vista-vacia-emoji">🎁</div>
+          <h3>Remedio sorpresa</h3>
+          <p>Aquí saldrá un mensajito distinto cada vez. Pronto.</p>
+        </div>
+      </main>
+
+      <!-- Barra de navegación de abajo -->
+      <nav class="nav">
+        <button class="nav-boton activo" data-vista="inicio">
+          <span class="nav-icono">🏠</span>
+          Inicio
+        </button>
+        <button class="nav-boton" data-vista="juegos">
+          <span class="nav-icono">🎮</span>
+          Juegos
+        </button>
+        <button class="nav-boton" data-vista="sorpresa">
+          <span class="nav-icono">🎁</span>
+          Sorpresa
+        </button>
+      </nav>
+    </section>
+
+
+    <!-- =========================================
+         VENTANITA (modal) donde se ve cada remedio
+         ========================================= -->
+    <div class="modal oculta" id="modal">
+      <div class="modal-caja">
+        <button class="modal-cerrar" id="modal-cerrar" aria-label="Cerrar">✕</button>
+        <div class="modal-contenido" id="modal-contenido"></div>
+      </div>
     </div>
 
     <script src="script.js"></script>
   </body>
 </html>
-
-
