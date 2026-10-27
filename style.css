@@ -98,21 +98,46 @@ body {
 
 /* entrar como botón */
 .mensaje a {
-    position: relative;
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    right: 18px;
+    bottom: 46px;   /* estos 4 valores son el recuadro de puntitos, con 0 cubre toda la carta */
     z-index: 9999;
     cursor: pointer;
-    display: inline-block;
-    padding: 6px 16px;
-    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 12px;
+    line-height: 1.2;
+    border-radius: 12px;
     background: var(--menta);
     color: var(--verde-oscuro);
+    font-size: 1.6rem;
     font-weight: bold;
     text-decoration: none;
-    transition: transform 0.2s;
+    transition: transform 0.2s, background 0.2s;
+}
+
+/* el corazón grande del botón */
+.mensaje a span {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+/* el textito pequeño que va dentro del botón */
+.mensaje a p {
+    top: 0;
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: normal;
 }
 
 .mensaje a:hover {
-    transform: scale(1.06);
+    transform: scale(1.03);
+    background: var(--verde-claro);
 }
 
 .carta {
@@ -282,30 +307,80 @@ body {
     gap: 14px;
 }
 
+/* el frasco entero, que sigue siendo un botón */
 .tarjeta {
     position: relative;
-    font-family: var(--fuente);
-    color: var(--verde-oscuro);
-    background: var(--crema-clara);
-    border: 3px solid transparent;
-    border-radius: 18px;
-    padding: 20px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    padding: 0;
+    border: none;
+    background: none;
+    font-family: var(--fuente);
+    color: var(--verde-oscuro);
     text-align: center;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s, border-color 0.2s;
+    transition: transform 0.2s;
 }
 
 .tarjeta:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px) rotate(-1deg);
 }
 
 .tarjeta:active {
     transform: scale(0.97);
+}
+
+/* el tapón con rayitas */
+.tapon {
+    width: 46%;
+    height: 22px;
+    box-sizing: border-box;
+    border: 3px solid var(--verde-oscuro);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    background:
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0 3px, transparent 3px 8px),
+        var(--verde);
+}
+
+/* el cuerpo de cristal, flex: 1 para que los de una fila midan igual */
+.cuerpo {
+    position: relative;
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 24px 8px 14px;
+    background: var(--crema-clara);
+    border: 3px solid var(--verde-oscuro);
+    border-radius: 14px 14px 24px 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* el líquido, es un rectángulo que sube */
+.cuerpo::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 30%;
+    background: var(--menta);
+    transition: height 0.6s ease;
+}
+
+/* la etiqueta, relative para que quede por encima del líquido */
+.etiqueta {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 6px;
+    background: #fff;
+    border: 2px dashed var(--verde-sobre);
+    border-radius: 8px;
 }
 
 .tarjeta-emoji {
@@ -323,15 +398,15 @@ body {
 }
 
 /* cuando ya abres un remedio */
-.tarjeta.abierta {
-    border-color: var(--verde);
+.tarjeta.abierta .cuerpo::before {
+    height: 90%;
 }
 
 .tarjeta.abierta::after {
     content: "✓";
     position: absolute;
-    top: 8px;
-    right: 10px;
+    top: 27px;
+    right: 8px;
     width: 22px;
     height: 22px;
     border-radius: 50%;
@@ -491,6 +566,10 @@ body {
 @media (max-width: 768px) {
     .mensaje:before {
         bottom: 45px;
+    }
+
+    .mensaje a {
+        bottom: 51px;
     }
 
     .mensaje p {
