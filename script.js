@@ -133,7 +133,7 @@ function actualizarBateria() {
 const coloresConfeti = ["#a6f0c6", "#3fb070", "#ddc4ff", "#eae2b7", "#ff9ecb", "#ffd86b"];
 
 function lanzarConfeti() {
-    for (let i = 0; i < 900; i++) {
+    for (let i = 0; i < 450; i++) {
         const trozo = document.createElement("div");
         trozo.classList.add("confeti");
 
@@ -177,7 +177,7 @@ const contenidos = {
     `,
 
     fotos: `
-        <h3>📸</h3>
+        <h3>SUYIFOTOTAAAAS</h3>
         <div class="collage">
             <img src="suyisenderismo.jpeg" alt="Foto de Suyi">
             <img src="suyibeso.jpg" alt="Foto de Suyi">
