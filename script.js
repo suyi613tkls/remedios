@@ -133,7 +133,7 @@ function actualizarBateria() {
 const coloresConfeti = ["#a6f0c6", "#3fb070", "#ddc4ff", "#eae2b7", "#ff9ecb", "#ffd86b"];
 
 function lanzarConfeti() {
-    for (let i = 0; i < 90; i++) {
+    for (let i = 0; i < 900; i++) {
         const trozo = document.createElement("div");
         trozo.classList.add("confeti");
 
