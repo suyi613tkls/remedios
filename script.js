@@ -177,7 +177,7 @@ const contenidos = {
     `,
 
     fotos: `
-        <h3>📸</h3>
+        <h3>SUYIFOTOOTAS</h3>
         <div class="collage">
             <img src="suyisenderismo.jpeg" alt="Foto de Suyi">
             <img src="suyibeso.jpg" alt="Foto de Suyi">
@@ -185,6 +185,10 @@ const contenidos = {
             <img src="suyimiedo.jpeg" alt="Foto de Suyi">
             <img src="suyitusudadera.jpeg" alt="Foto de Suyi">
             <img src="suyiojopez.jpeg" alt="Foto de Suyi">
+            <img src="suyicamuflaje.jpeg" alt="Foto de Suyi">
+            <img src="suyifuckingoff.jpeg" alt="Foto de Suyi">
+            <img src="suyirisa.jpeg" alt="Foto de Suyi">
+            <img src="suyiromeria.jpeg" alt="Foto de Suyi">
         </div>
     `,
 
@@ -294,7 +298,7 @@ function empezarParejas() {
         carta.dataset.foto = foto;
         carta.innerHTML = `
             <span class="carta-cara carta-dorso">💚</span>
-            <span class="carta-cara carta-frente"><img src="${foto}" alt="Foto de Suyi"></span>
+            <span class="carta-cara carta-frente"><img src="${foto}" alt="Carta"></span>
         `;
         carta.addEventListener("click", () => girarCarta(carta));
         tablero.appendChild(carta);
