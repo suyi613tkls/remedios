@@ -133,7 +133,7 @@ function actualizarBateria() {
 const coloresConfeti = ["#a6f0c6", "#3fb070", "#ddc4ff", "#eae2b7", "#ff9ecb", "#ffd86b"];
 
 function lanzarConfeti() {
-    for (let i = 0; i < 450; i++) {
+    for (let i = 0; i < 90; i++) {
         const trozo = document.createElement("div");
         trozo.classList.add("confeti");
 
@@ -177,7 +177,7 @@ const contenidos = {
     `,
 
     fotos: `
-        <h3>SUYIFOTOTAAAAS</h3>
+        <h3>📸</h3>
         <div class="collage">
             <img src="suyisenderismo.jpeg" alt="Foto de Suyi">
             <img src="suyibeso.jpg" alt="Foto de Suyi">
@@ -240,3 +240,122 @@ document.querySelectorAll(".tarjeta").forEach((tarjeta) => {
         actualizarBateria();
     });
 });
+
+
+/* =========================================
+   minijuegos, de momento solo las parejas
+   ========================================= */
+const juegosMenu = document.querySelector("#juegos-menu");
+const juegoParejas = document.querySelector("#juego-parejas");
+const tablero = document.querySelector("#tablero");
+const parejasMovs = document.querySelector("#parejas-movs");
+const parejasMensaje = document.querySelector("#parejas-mensaje");
+
+// las fotos que salen en las cartas, cada una va dos veces
+const fotosParejas = [
+    "suyisenderismo.jpeg",
+    "suyibeso.jpg",
+    "suyifeli.jpg",
+    "suyimiedo.jpeg",
+    "suyitusudadera.jpeg",
+    "suyiojopez.jpeg",
+];
+
+let primeraCarta = null;      // la carta que está girada esperando pareja
+let comparando = false;       // true mientras espera para girar las dos de vuelta
+let movimientos = 0;
+let parejasEncontradas = 0;
+
+// mezcla una lista al azar (algoritmo de Fisher-Yates)
+function barajar(lista) {
+    const copia = [...lista];
+    for (let i = copia.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copia[i], copia[j]] = [copia[j], copia[i]];
+    }
+    return copia;
+}
+
+function empezarParejas() {
+    tablero.innerHTML = "";
+    primeraCarta = null;
+    comparando = false;
+    movimientos = 0;
+    parejasEncontradas = 0;
+    parejasMovs.textContent = "0";
+    parejasMensaje.textContent = "";
+
+    // cada foto dos veces y todo mezclado
+    const cartas = barajar([...fotosParejas, ...fotosParejas]);
+
+    cartas.forEach((foto) => {
+        const carta = document.createElement("button");
+        carta.classList.add("carta-juego");
+        carta.dataset.foto = foto;
+        carta.innerHTML = `
+            <span class="carta-cara carta-dorso">💚</span>
+            <span class="carta-cara carta-frente"><img src="${foto}" alt="Foto de Suyi"></span>
+        `;
+        carta.addEventListener("click", () => girarCarta(carta));
+        tablero.appendChild(carta);
+    });
+}
+
+function girarCarta(carta) {
+    if (comparando) return;                          // espera a que se giren las dos de vuelta
+    if (carta.classList.contains("girada")) return;  // ya está girada o ya es pareja
+
+    carta.classList.add("girada");
+
+    // si es la primera de la jugada, solo la guardo y espero a la segunda
+    if (primeraCarta === null) {
+        primeraCarta = carta;
+        return;
+    }
+
+    // es la segunda, así que cuenta un movimiento
+    movimientos++;
+    parejasMovs.textContent = movimientos;
+
+    if (primeraCarta.dataset.foto === carta.dataset.foto) {
+        // pareja, se quedan giradas
+        primeraCarta.classList.add("encontrada");
+        carta.classList.add("encontrada");
+        primeraCarta = null;
+        parejasEncontradas++;
+
+        if (parejasEncontradas === fotosParejas.length) {
+            ganarParejas();
+        }
+    } else {
+        // no es pareja, las giro de vuelta después de un momento
+        comparando = true;
+        const anterior = primeraCarta;
+        primeraCarta = null;
+
+        setTimeout(() => {
+            anterior.classList.remove("girada");
+            carta.classList.remove("girada");
+            comparando = false;
+        }, 900);
+    }
+}
+
+function ganarParejas() {
+    parejasMensaje.textContent = "¡las has encontrado todas en " + movimientos + " movimientos! eres un crack 💚";
+    lanzarConfeti();
+}
+
+// botones del menú y del juego
+document.querySelector('[data-juego="parejas"]').addEventListener("click", () => {
+    juegosMenu.classList.add("oculta");
+    juegoParejas.classList.remove("oculta");
+    empezarParejas();
+});
+
+document.querySelector("#volver-menu").addEventListener("click", () => {
+    juegoParejas.classList.add("oculta");
+    juegosMenu.classList.remove("oculta");
+});
+
+document.querySelector("#parejas-reiniciar").addEventListener("click", empezarParejas);

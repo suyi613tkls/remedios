@@ -68,7 +68,7 @@
           <div class="bateria-punta"></div>
           <span class="bateria-texto" id="bateria-texto">0%</span>
         </div>
-        <p class="bateria-mensaje" id="bateria-mensaje">visita los botecitos para ir recargando la bateríaa</p>
+        <p class="bateria-mensaje" id="bateria-mensaje">Abre los remedios para cargar la batería 🔋</p>
       </header>
 
       <!-- inicio principio -->
@@ -91,7 +91,7 @@
               <span class="etiqueta">
                 <span class="tarjeta-emoji">🖼️</span>
                 <span class="tarjeta-titulo">Fototas</span>
-                <span class="tarjeta-sub">suyis en misiones secundarias jsjs</span>
+                <span class="tarjeta-sub">lindas eh, no te pienses jsjs</span>
               </span>
             </span>
           </button>
@@ -122,10 +122,34 @@
 
       <!-- parte de los juegos, ideas principales -->
       <main class="vista" id="vista-juegos">
-        <div class="vista-vacia">
-          <div class="vista-vacia-emoji">🎮</div>
-          <h3>Minijuegos</h3>
-          <p>Aquí van a vivir los minijuegos. Muy muy pronto.</p>
+        <!-- el menú con la lista de juegos -->
+        <div id="juegos-menu">
+          <h3 class="juegos-titulo">Minijuegos 🎮</h3>
+
+          <button class="juego-boton" data-juego="parejas">
+            <span class="juego-emoji">🃏</span>
+            <span class="juego-texto">
+              <strong>Parejas</strong>
+              <small>encuentra las fototas iguales</small>
+            </span>
+          </button>
+
+          <div class="juego-boton juego-bloqueado">
+            <span class="juego-emoji">🔒</span>
+            <span class="juego-texto">
+              <strong>Próximamente</strong>
+              <small>otro juego en camino</small>
+            </span>
+          </div>
+        </div>
+
+        <!-- el juego de las parejas, empieza oculto -->
+        <div id="juego-parejas" class="oculta">
+          <button class="volver" id="volver-menu">← Volver</button>
+          <p class="juego-info">Movimientos: <strong id="parejas-movs">0</strong></p>
+          <div class="tablero" id="tablero"></div>
+          <p class="parejas-mensaje" id="parejas-mensaje"></p>
+          <button class="boton" id="parejas-reiniciar">Jugar otra vez</button>
         </div>
       </main>
 
