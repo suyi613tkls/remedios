@@ -100,6 +100,7 @@ const bateriaTexto = document.querySelector("#bateria-texto");
 const bateriaMensaje = document.querySelector("#bateria-mensaje");
 
 const remediosAbiertos = new Set();   // un Set no repite elementos
+let confetiLanzado = false;           // para que el confeti salga una sola vez
 const totalRemedios = document.querySelectorAll(".tarjeta").length;
 
 // mensajito que sale según va abriendo remedios
@@ -117,6 +118,43 @@ function actualizarBateria() {
     bateriaNivel.style.width = porcentaje + "%";
     bateriaTexto.textContent = porcentaje + "%";
     bateriaMensaje.textContent = mensajesBateria[remediosAbiertos.size];
+
+    // si ya están todos abiertos, confeti (solo la primera vez)
+    if (remediosAbiertos.size === totalRemedios && !confetiLanzado) {
+        confetiLanzado = true;
+        lanzarConfeti();
+    }
+}
+
+
+/* =========================================
+   confeti cuando la batería llega al 100%
+   ========================================= */
+const coloresConfeti = ["#a6f0c6", "#3fb070", "#ddc4ff", "#eae2b7", "#ff9ecb", "#ffd86b"];
+
+function lanzarConfeti() {
+    for (let i = 0; i < 90; i++) {
+        const trozo = document.createElement("div");
+        trozo.classList.add("confeti");
+
+        // cada trozo sale con valores al azar para que no caigan todos igual
+        trozo.style.left = Math.random() * 100 + "vw";
+        trozo.style.background = coloresConfeti[Math.floor(Math.random() * coloresConfeti.length)];
+        trozo.style.animationDuration = 2.5 + Math.random() * 2 + "s";
+        trozo.style.animationDelay = Math.random() * 0.8 + "s";
+        trozo.style.setProperty("--vaiven", (Math.random() * 200 - 100) + "px");
+
+        // algunos redondos y de distinto tamaño
+        const tam = 6 + Math.random() * 8;
+        trozo.style.width = tam + "px";
+        trozo.style.height = tam * 1.5 + "px";
+        if (Math.random() < 0.3) trozo.style.borderRadius = "50%";
+
+        // cuando termina de caer lo borro para no llenar la página de divs
+        trozo.addEventListener("animationend", () => trozo.remove());
+
+        document.body.appendChild(trozo);
+    }
 }
 
 

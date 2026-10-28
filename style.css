@@ -488,6 +488,24 @@ body {
 
 
 /* =========================================
+   confeti, lo crea el JS cuando la batería llega al 100%
+   ========================================= */
+.confeti {
+    position: fixed;
+    top: -20px;
+    z-index: 20000;           /* por encima de la ventanita modal */
+    pointer-events: none;     /* para que no tape los clics */
+    animation: caer linear forwards;
+}
+
+@keyframes caer {
+    to {
+        transform: translate(var(--vaiven), 110vh) rotate(720deg);
+    }
+}
+
+
+/* =========================================
    ventanita modal
    ========================================= */
 .modal {
